@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Specialized;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using music.Data;
 using music.Models;
@@ -41,13 +43,36 @@ namespace music.Controllers
         }
 
         // POST api/<MusicController>
+        //[HttpPost]
+        //public async Task<IActionResult> Post([FromBody] Music value)
+        //{
+        //    await _dbContext.AddAsync(value);
+        //    await _dbContext.SaveChangesAsync();
+        //    return StatusCode(StatusCodes.Status201Created);
+        //}
+
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Music value)
+        public async Task<IActionResult> Post([FromForm] Music value)
         {
+            string connection = @"DefaultEndpointsProtocol=https;AccountName=musicaccountstrg;AccountKey=OfepGxiZzY44DW+GI10Y5ctvt8mLOaLtBV2/F+Tva6XT+GFrXu22wEjfIUACWX0e+qEBX36CdCz0+ASt7GbGTA==;EndpointSuffix=core.windows.net";
+            string containerName = "songsmt";
+            BlobContainerClient blobContainerClient = new BlobContainerClient(connection, containerName);
+            BlobClient blobClient = blobContainerClient.GetBlobClient(value.Image.FileName);
+            var memoryStream = new MemoryStream();
+            await value.Image.CopyToAsync(memoryStream);
+            memoryStream.Position = 0;
+            await blobClient.UploadAsync(memoryStream);
+
+            value.ImageUrl = blobClient.Uri.AbsoluteUri;
             await _dbContext.AddAsync(value);
             await _dbContext.SaveChangesAsync();
             return StatusCode(StatusCodes.Status201Created);
         }
+
+
+
+
+
 
         // PUT api/<MusicController>/5
         [HttpPut("{id}")]

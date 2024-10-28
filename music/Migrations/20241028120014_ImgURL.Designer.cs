@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using music.Data;
 
@@ -10,9 +11,11 @@ using music.Data;
 namespace music.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    partial class ApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241028120014_ImgURL")]
+    partial class ImgURL
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,6 +33,7 @@ namespace music.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ImageUrl")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("duration")
@@ -52,6 +56,7 @@ namespace music.Migrations
                         new
                         {
                             Id = 1,
+                            ImageUrl = "",
                             duration = "3.21",
                             language = "en",
                             title = "vasylky"
@@ -59,6 +64,7 @@ namespace music.Migrations
                         new
                         {
                             Id = 2,
+                            ImageUrl = "",
                             duration = "4.31",
                             language = "uk",
                             title = "dmytroloh"

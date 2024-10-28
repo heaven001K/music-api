@@ -1,4 +1,6 @@
-﻿namespace music.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace music.Models
 {
     public class Music
     {
@@ -10,5 +12,10 @@
         public string language { get; set; } = "";
 
         public string duration { get; set; } = "";
+
+        [NotMapped]
+        public IFormFile Image { get; set; }
+
+        public string? ImageUrl { get; set; }
     }
 }
