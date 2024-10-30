@@ -1,28 +1,8 @@
 [
   {
-    "ContainingType": "music.Controllers.MusicController",
-    "Method": "Get",
-    "RelativePath": "api/Music",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[music.Models.Music, music, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "music.Controllers.MusicController",
+    "ContainingType": "music.Controllers.ArtistController",
     "Method": "Post",
-    "RelativePath": "api/Music",
+    "RelativePath": "api/Artist",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -33,17 +13,17 @@
         "IsRequired": false
       },
       {
-        "Name": "title",
+        "Name": "Name",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "language",
+        "Name": "Gender",
         "Type": "System.String",
         "IsRequired": false
       },
       {
-        "Name": "duration",
+        "Name": "ImageUrl",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -53,62 +33,14 @@
         "IsRequired": false
       },
       {
-        "Name": "ImageUrl",
-        "Type": "System.String",
+        "Name": "Albums",
+        "Type": "System.Collections.Generic.ICollection\u00601[[music.Models.Album, music, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "music.Controllers.MusicController",
-    "Method": "Get",
-    "RelativePath": "api/Music/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "music.Controllers.MusicController",
-    "Method": "Put",
-    "RelativePath": "api/Music/{id}",
-    "HttpMethod": "PUT",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
       },
       {
-        "Name": "songObj",
-        "Type": "music.Models.Music",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "music.Controllers.MusicController",
-    "Method": "Delete",
-    "RelativePath": "api/Music/{id}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
+        "Name": "Songs",
+        "Type": "System.Collections.Generic.ICollection\u00601[[music.Models.Music, music, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace music.Models
 {
@@ -7,15 +8,26 @@ namespace music.Models
 
         public int Id { get; set; }
 
-        public string title { get; set; } = "";
+        public string Title { get; set; } = "";
+        public string Language { get; set; } = "";
+        
+        public string Duration { get; set; } = "";
 
-        public string language { get; set; } = "";
+        public DateTime uploadDate { get; set; }
 
-        public string duration { get; set; } = "";
+        public bool isFeatured { get; set; }
 
         [NotMapped]
         public IFormFile Image { get; set; }
 
         public string? ImageUrl { get; set; }
+        [NotMapped]
+        public IFormFile AudioFile { get; set; }
+
+        public string AudioUrl { get; set; }
+
+        public int ArtistId { get; set; }
+
+        public int? AlbumId { get; set; }
     }
 }

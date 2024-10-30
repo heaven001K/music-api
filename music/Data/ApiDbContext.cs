@@ -11,33 +11,18 @@ namespace music.Data
             
 
 
-           }
-           public DbSet<Music> songs { get; set; }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Music>().HasData(
-                new Music
-                {
-                    Id = 1,
-                    title = "vasylky",
-                    language = "en",
-                    duration = "3.21"
-                },
-                new Music
-                {
-                    Id = 2,
-                    title = "dmytroloh",
-                    language = "uk",
-                    duration = "4.31"
-                });
-
-             
         }
+        public DbSet<Music> songs { get; set; }
+        public DbSet<Album> Albums { get; set; }
+        public DbSet<Artist> Artists { get; set; }
+
 
 
     }
 
 }
+
+
 
 
 
