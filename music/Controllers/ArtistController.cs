@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using music.Data;
 using music.Helpers;
 using music.Models;
+using System.Net.Http.Headers;
 
 namespace music.Controllers
 {
@@ -30,5 +32,28 @@ namespace music.Controllers
             return StatusCode(StatusCodes.Status201Created);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetArtist()
+        {
+            var artists = await _dbContext.Artists
+                .Select(artist => new
+                {
+                    Id = artist.Id,
+                    Name = artist.Name,
+                    Image = artist.ImageUrl
+                })
+                .ToListAsync();
+
+            return Ok(artists);
+        }
+
+        [HttpGet("[action]")]
+
+        public IActionResult ArtistDetails(int artistId)
+        {
+            var artistDetails = _dbContext.Artists.Where(a => a.Id == artistId).Include(a => a.Songs);
+            return Ok(artistDetails);
+        }
     }
 }
+

@@ -24,7 +24,7 @@ namespace music.Models
         [NotMapped]
         public IFormFile AudioFile { get; set; }
 
-        public string AudioUrl { get; set; }
+        public string AudioUrl { get; set; } = "";
 
         public int ArtistId { get; set; }
 

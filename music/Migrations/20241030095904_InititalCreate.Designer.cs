@@ -12,7 +12,7 @@ using music.Data;
 namespace music.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20241029115919_InititalCreate")]
+    [Migration("20241030095904_InititalCreate")]
     partial class InititalCreate
     {
         /// <inheritdoc />
@@ -27,11 +27,11 @@ namespace music.Migrations
 
             modelBuilder.Entity("music.Models.Album", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ArtistId")
                         .HasColumnType("int");
@@ -40,11 +40,11 @@ namespace music.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("name")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("ArtistId");
 
@@ -53,11 +53,11 @@ namespace music.Migrations
 
             modelBuilder.Entity("music.Models.Artist", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Gender")
                         .IsRequired()
@@ -71,7 +71,7 @@ namespace music.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Artists");
                 });
@@ -87,10 +87,7 @@ namespace music.Migrations
                     b.Property<int?>("AlbumId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Artistid")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ArtustId")
+                    b.Property<int>("ArtistId")
                         .HasColumnType("int");
 
                     b.Property<string>("AudioUrl")
@@ -122,7 +119,7 @@ namespace music.Migrations
 
                     b.HasIndex("AlbumId");
 
-                    b.HasIndex("Artistid");
+                    b.HasIndex("ArtistId");
 
                     b.ToTable("songs");
                 });
@@ -139,17 +136,19 @@ namespace music.Migrations
             modelBuilder.Entity("music.Models.Music", b =>
                 {
                     b.HasOne("music.Models.Album", null)
-                        .WithMany("songs")
+                        .WithMany("Songs")
                         .HasForeignKey("AlbumId");
 
                     b.HasOne("music.Models.Artist", null)
                         .WithMany("Songs")
-                        .HasForeignKey("Artistid");
+                        .HasForeignKey("ArtistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("music.Models.Album", b =>
                 {
-                    b.Navigation("songs");
+                    b.Navigation("Songs");
                 });
 
             modelBuilder.Entity("music.Models.Artist", b =>
